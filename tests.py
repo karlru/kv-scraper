@@ -1,4 +1,4 @@
-import kv_scraper
+from kv_scraper import Search
 
 params1 = {
 	# 1=sell, 2=rent, 30=short time rent, 20=all
@@ -27,3 +27,26 @@ params3 = {
 	'deal_type': 2,
 	'county': 12,
 }
+
+params4 = 'a'
+
+params5 = [params3, params4]
+
+params6 = [params1, params2]
+
+params7 = {
+	'deal_type': 2,
+	'county': 12,
+	'parish': 1063,
+	'price_min': 3500,
+	'price_max': 5000,
+}
+
+if __name__ == '__main__':
+	search = Search(params6)
+	if search.success:
+		for query_id, data in search.data.items():
+			for listing in data['listings']:
+				print(listing.data)
+	else:
+		print(search.error)
